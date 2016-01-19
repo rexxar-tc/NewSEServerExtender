@@ -746,14 +746,11 @@ namespace SEModAPIInternal.API.Server
 						{
 							MyObjectBuilder_EntityBase entity = (MyObjectBuilder_EntityBase)myObjectBuilderWorld.Sector.SectorObjects[ r ];
 
-                            if ( !( entity is MyObjectBuilder_CubeGrid ) && !( entity is MyObjectBuilder_VoxelMap ) && !( entity is MyObjectBuilder_Character ) )
-                            	continue;
+							if ( !( entity is MyObjectBuilder_CubeGrid ) && !( entity is MyObjectBuilder_VoxelMap ) && !( entity is MyObjectBuilder_Character ) )
+								continue;
 
-                            if ( entity is MyObjectBuilder_Planet )
-                                continue;
-
-                            if ( entity is MyObjectBuilder_CubeGrid )
-                                continue;
+							if ( ( entity is MyObjectBuilder_CubeGrid ) && ( (MyObjectBuilder_CubeGrid)entity ).DisplayName.Contains( "CommRelay" ) )
+								continue;
 
 							/*
 							if (!(entity is MyObjectBuilder_CubeGrid))
@@ -763,20 +760,14 @@ namespace SEModAPIInternal.API.Server
 								continue;
 							*/
 
-							//myObjectBuilderWorld.Sector.SectorObjects.RemoveAt( r );
+							myObjectBuilderWorld.Sector.SectorObjects.RemoveAt( r );
 						}
 
 						myObjectBuilderWorld.Sector.Encounters = null;
-                        /*
-                        foreach ( KeyValuePair<string, byte[ ]> entry in myObjectBuilderWorld.VoxelMaps.Dictionary )
-                        {
-                            if ( entry.Key.Contains( "Asteroid" ) )
-                                myObjectBuilderWorld.VoxelMaps.Dictionary.Remove( entry.Key );
-                        }
-                        */
-						//myObjectBuilderWorld.VoxelMaps.Dictionary.Clear( );
-						//myObjectBuilderWorld.Checkpoint.Settings.ProceduralDensity = 0f;
-						//myObjectBuilderWorld.Checkpoint.Settings.ProceduralSeed = 0;
+
+						myObjectBuilderWorld.VoxelMaps.Dictionary.Clear( );
+						myObjectBuilderWorld.Checkpoint.Settings.ProceduralDensity = 0f;
+						myObjectBuilderWorld.Checkpoint.Settings.ProceduralSeed = 0;
 
 						// Check if this is OK?
 						//myObjectBuilderWorld.Checkpoint.ConnectedPlayers.Dictionary.Clear();
@@ -855,7 +846,7 @@ namespace SEModAPIInternal.API.Server
 
                         myObjectBuilderWorld.Sector.Encounters = null;
 
-                        //myObjectBuilderWorld.VoxelMaps.Dictionary.Clear();
+                        myObjectBuilderWorld.VoxelMaps.Dictionary.Clear();
                         myObjectBuilderWorld.Checkpoint.Settings.ProceduralDensity = 0f;
                         myObjectBuilderWorld.Checkpoint.Settings.ProceduralSeed = 0;
                     }

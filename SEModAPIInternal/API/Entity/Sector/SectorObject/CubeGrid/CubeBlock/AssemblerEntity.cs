@@ -1,0 +1,31 @@
+namespace SEModAPIInternal.API.Entity.Sector.SectorObject.CubeGrid.CubeBlock
+{
+	using System;
+	using System.Runtime.Serialization;
+	using Sandbox.Common.ObjectBuilders;
+
+	[DataContract]
+	public class AssemblerEntity : ProductionBlockEntity
+	{
+		#region "Attributes"
+
+		public static string AssemblerNamespace = "Sandbox.Game.Entities.Cube";
+		public static string AssemblerClass = "MyAssembler";
+
+		#endregion "Attributes"
+
+		#region "Constructors and Intializers"
+
+		public AssemblerEntity( CubeGridEntity parent, MyObjectBuilder_Assembler definition )
+			: base( parent, definition )
+		{
+		}
+
+		public AssemblerEntity( CubeGridEntity parent, MyObjectBuilder_Assembler definition, Object backingObject )
+			: base( parent, definition, backingObject )
+		{
+		}
+
+		#endregion "Constructors and Intializers"
+	}
+}

@@ -13,6 +13,7 @@
     using Sandbox;
     using Sandbox.Common.ObjectBuilders;
     using Sandbox.Engine.Multiplayer;
+    using Sandbox.Game.Entities;
     using Sandbox.Game.Replication;
     using Sandbox.ModAPI;
     using SEModAPI.API.Definitions;
@@ -88,6 +89,7 @@
                 SourceUserId = 0;
                 Priority = 0;
             }
+
         }
 
         #region "Attributes"
@@ -626,6 +628,9 @@
 		protected void Command_Delete( ChatEvent chatEvent )
 		{
 			ulong remoteUserId = chatEvent.RemoteUserId;
+            SendPrivateChatMessage( remoteUserId, "Sorry, some SESE chat commands are being deprecated. Try the /admin delete grids commands in the Essentials plugin." );
+            return;
+
 			List<string> commandParts = CommandParser.GetCommandParts( chatEvent.Message );
 			int paramCount = commandParts.Count - 1;
 
@@ -719,7 +724,7 @@
 					//}
 
 					//SendPrivateChatMessage( remoteUserId, string.Format( "{0} cube grids have been removed", entitiesToDispose.Count ) );
-					SendPrivateChatMessage( remoteUserId, "Unpowered grids removal temporarily unavailable in this version." );
+					SendPrivateChatMessage( remoteUserId, "Sorry, some SESE chat commands are being deprecated. Try /admin delete grids nopower in the Essentials plugin." );
 				}
 				else if ( commandParts[ 2 ].ToLower( ).Equals( "floatingobjects" ) )	//All floating objects
 				{
@@ -731,42 +736,32 @@
 						entity.Dispose();
 					}
 					 */
+                    /*
+                   MySandboxGame.Static.Invoke( ( ) =>
+                                                {
+                                                    int count = 0;
+                                                    HashSet<IMyEntity> entities = new HashSet<IMyEntity>( );
+                                                    MyAPIGateway.Entities.GetEntities( entities );
+                                                    List<IMyEntity> entitiesToRemove = new List<IMyEntity>( );
 
-                    MySandboxGame.Static.Invoke( ( ) =>
-                                                 {
-                                                     int count = 0;
-                                                     HashSet<IMyEntity> entities = new HashSet<IMyEntity>( );
-                                                     MyAPIGateway.Entities.GetEntities( entities );
-                                                     List<IMyEntity> entitiesToRemove = new List<IMyEntity>( );
+                                                    foreach ( IMyEntity entity in entities )
+                                                    {
+                                                        if ( entity is MyFloatingObject || entity is MyInventoryBagEntity )
+                                                            entitiesToRemove.Add( entity );
+                                                    }
 
-                                                     foreach ( IMyEntity entity in entities )
-                                                     {
-                                                         MyObjectBuilder_Base objectBuilder;
-                                                         try
-                                                         {
-                                                             objectBuilder = entity.GetObjectBuilder( );
-                                                         }
-                                                         catch
-                                                         {
-                                                             continue;
-                                                         }
-
-                                                         if ( objectBuilder is MyObjectBuilder_FloatingObject )
-                                                             entitiesToRemove.Add( entity );
-                                                     }
-
-                                                     for ( int r = entitiesToRemove.Count - 1; r >= 0; r-- )
-                                                     {
-                                                         IMyEntity entity = entitiesToRemove[r];
-                                                         //MyAPIGateway.Entities.RemoveEntity( entity );
-                                                         entity.Close( );
-                                                         MyMultiplayer.ReplicateImmediatelly( MyExternalReplicable.FindByObject( entity ) );
-                                                         count++;
-                                                     }
-                                                     SendPrivateChatMessage( remoteUserId, count + " floating objects have been removed" );
-                                                 } );
-
-
+                                                    foreach(IMyEntity entity in entitiesToRemove )
+                                                    {
+                                                        //MyAPIGateway.Entities.RemoveEntity( entity );
+                                                        entity.Close( );
+                                                        MyMultiplayer.ReplicateImmediatelly( MyExternalReplicable.FindByObject( entity ) );
+                                                        count++;
+                                                    }
+                                                    SendPrivateChatMessage( remoteUserId, count + " floating objects have been removed" );
+                                                } );
+                   */
+                    SendPrivateChatMessage( remoteUserId, "Sorry, some SESE chat commands are being deprecated." +
+                                                    "Try /admin delete floatingobjects in the Essentials plugin." );
                 }
 				else
 				{
@@ -988,11 +983,14 @@
 					ApplicationLog.BaseLog.Error( ex );
 				}
 			}
+            
 		}
 
 		protected void Command_Teleport( ChatEvent chatEvent )
 		{
 			ulong remoteUserId = chatEvent.RemoteUserId;
+            SendPrivateChatMessage( remoteUserId, "Sorry, some SESE chat commands are being deprecated. Try the /admin move commands in the Essentials plugin." );
+            /*
 			List<string> commandParts = CommandParser.GetCommandParts( chatEvent.Message );
 			int paramCount = commandParts.Count - 1;
 
@@ -1030,11 +1028,15 @@
 					ApplicationLog.BaseLog.Error( ex );
 				}
 			}
+            */
 		}
 
 		protected void Command_Stop( ChatEvent chatEvent )
 		{
 			ulong remoteUserId = chatEvent.RemoteUserId;
+            SendPrivateChatMessage(remoteUserId,"Sorry, some SESE chat commands are being deprecated. Try the /admin stop command in the Essentials plugin.");
+            return;
+
 			List<string> commandParts = CommandParser.GetCommandParts( chatEvent.Message );
 			int paramCount = commandParts.Count - 1;
 
@@ -1135,7 +1137,11 @@
 
 		protected void Command_Owner( ChatEvent chatEvent )
 		{
-			ulong remoteUserId = chatEvent.RemoteUserId;
+            ulong remoteUserId = chatEvent.RemoteUserId;
+            SendPrivateChatMessage( remoteUserId, "Sorry, some SESE chat commands are being deprecated. Try the /admin ownership change command in the Essentials plugin." );
+            return;
+
+            //ulong remoteUserId = chatEvent.RemoteUserId;
 			List<string> commandParts = CommandParser.GetCommandParts( chatEvent.Message );
 			int paramCount = commandParts.Count - 1;
 

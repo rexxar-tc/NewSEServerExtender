@@ -7,6 +7,7 @@ namespace SEModAPIExtensions.API
 	using SEModAPIInternal.API.Entity;
 	using SEModAPIInternal.API.Entity.Sector.SectorObject;
 	using SEModAPIInternal.API.Entity.Sector.SectorObject.CubeGrid;
+	using SEModAPIInternal.API.Entity.Sector.SectorObject.CubeGrid.CubeBlock;
 	using SEModAPIInternal.API.Server;
 	using SEModAPIInternal.API.Utility;
 

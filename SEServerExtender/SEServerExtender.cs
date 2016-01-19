@@ -2221,7 +2221,6 @@ namespace SEServerExtender
 			CubeGridEntity cubeGridEntity = linkedObject as CubeGridEntity;
 			if ( cubeGridEntity != null )
 			{
-                
 				cubeGridEntity.Repair( );
 
 				TRV_Entities.BeginUpdate( );
